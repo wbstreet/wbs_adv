@@ -1,0 +1,19 @@
+
+<input type='button' value='Добавить новый баннер' onclick="W.open_by_api('create_banner', {url:mod_adv.url_api, data:{category_id: {{category_id}} }})">
+<input type='button' value='Добавить существующий' onclick="W.open_by_api('window_clone_banner')">
+
+{% if banners is empty %}
+В данном рекламном месте баннеров нет
+{% endif %}
+
+{% for banner in banners %}
+    <form>
+        <td><img src='{{ banner.img }}' style='width:150px;height:auto;'> <input type='file' name='image' value='Заменить'> </td>
+        <input type='text' name='title' value='{{ banner.title }}'>
+        <input type='text' name ='url' value='{{ banner.url }}'>
+        <input type='checkbox' name='is_active' {% if banner.is_active == '1' %} checked {% endif %}>
+        {{ banner.show_times_current }}
+        из
+        <input type='number' name='show_times_max' value='{{ banner.show_times_max}}'>
+    </form>
+{% endif %}
